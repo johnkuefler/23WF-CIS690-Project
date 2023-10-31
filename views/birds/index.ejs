@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <%- include ../partials/head %>
+
+  <body>
+    <% include ../partials/navbar %>
+
+    <div class="container">
+      <h1>Home Page</h1>
+     
+      <form method="post" action="/birds/create">
+        <input type="text" name="species" placeholder="Species"/>
+        <input type="text" name="nickName" placeholder="Nickname"/>
+        
+        <select name="status">
+          <option>Alive</option>
+          <option>Dead</option>
+          <option>Unknown</option>
+        </select>
+        <input type="submit" value="Add Bird"/>
+      </form>
+
+
+      <br>
+      <hr>
+      <h2>List of Birds</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Species</th>
+            <th>Nickname</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <% for (let i = 0; i < birdData.length; i++) { %>
+          <tr>
+            <td><%= birdData[i].species %></td>
+            <td><%=birdData[i].nickName %></td>
+            <td><%=birdData[i].status %></td>
+            <td>
+              <a href="/birds/update?_id=<%=birdData[i]._id%>">Edit</a> | 
+              <a href="/birds/delete?_id=<%=birdData[i]._id%>" onclick="return confirm('Are you sure you want to delete this?')">Delete</a></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+    <% include ../partials/scripts %>
+  </body>
+</html>

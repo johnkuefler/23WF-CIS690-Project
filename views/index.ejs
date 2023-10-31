@@ -8,25 +8,7 @@
     <div class="container">
       <h1>Home Page</h1>
      
-      <form method="post" action="/">
-        <input type="text" name="species" placeholder="Species"/>
-        <input type="text" name="nickName" placeholder="Nickname"/>
-        
-        <select name="status">
-          <option>Alive</option>
-          <option>Dead</option>
-          <option>Unknown</option>
-        </select>
-        <input type="submit" value="Add Bird"/>
-      </form>
-
-
-      <br>
-      <hr>
-      <h2>List of Birds</h2>
-      <% for (let i = 0; i < birdData.length; i++) { %>
-        <p><%= birdData[i].species %> - <%=birdData[i].nickName %> <a href="/delete?_id=<%=birdData[i]._id%>" onclick="return confirm('Are you sure you want to delete this?')">Delete</a></p>
-      <% } %>
+      <a href="/birds">Go to Birds</a>
     </div>
     <% include ./partials/scripts %>
   </body>

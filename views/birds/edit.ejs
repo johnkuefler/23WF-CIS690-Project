@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <%- include ../partials/head %>
+
+  <body>
+    <% include ../partials/navbar %>
+
+    <div class="container">
+      <h1>Edit Data</h1>
+     
+      <form method="post" action="/birds/update">
+        <input type="hidden" name="_id"  value="<%=birdData._id%>"/>
+
+        <input type="text" name="species" placeholder="Species" value="<%=birdData.species%>"/>
+        <input type="text" name="nickName" placeholder="Nickname" value="<%=birdData.nickName%>"/>
+        <input type="text" name="status" placeholder="Status" value="<%=birdData.status%>"/>
+       
+        <input type="submit" value="Save Edit"/>
+      </form>
+      
+    </div>
+    <% include ../partials/scripts %>
+  </body>
+</html>
