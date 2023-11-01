@@ -13,8 +13,32 @@
 
         <input type="text" name="species" placeholder="Species" value="<%=birdData.species%>"/>
         <input type="text" name="nickName" placeholder="Nickname" value="<%=birdData.nickName%>"/>
-        <input type="text" name="status" placeholder="Status" value="<%=birdData.status%>"/>
-       
+        
+        <select name="status">
+          <% if(birdData.status == 'Alive') { %>
+            <option selected>Alive</option>
+          <% } else { %>
+            <option>Alive</option>
+          <% } %>
+          <% if (birdData.status == 'Dead') { %>
+            <option selected>Dead</option>
+          <% } else { %>
+            <option>Dead</option>
+          <% } %>
+          <% if (birdData.status == 'Unknown') { %>
+            <option selected>Unknown</option>
+          <% } else { %>
+            <option>Unknown</option>
+          <% } %>
+        </select>
+
+        <!-- <select name="status">
+          <% ['Alive', 'Dead', 'Unknown'].forEach(function(status) { %>
+            <option <%= birdData.status === status ? 'selected' : '' %>> <%= status %> </option>
+          <% }); %>
+        </select> -->
+
+
         <input type="submit" value="Save Edit"/>
       </form>
       
