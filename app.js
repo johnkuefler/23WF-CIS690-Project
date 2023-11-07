@@ -3,15 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
+var flash = require('connect-flash');
+var bodyParser = require('body-parser');
+
+var app = express();
+
+
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(bodyParser.json());
+var session = require('express-session');
+
+require('./config/passport')(passport);
+
+app.use(cookieParser()); // read cookies (needed for auth)
+
 
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
 var patientsRouter = require('./routes/patients');
 var birdsRouter = require('./routes/birds');
-
-var app = express();
+var accountsRouter = require('./routes/accounts');
 
 require('dotenv').config({ path: __dirname + '/.env' })
 
@@ -27,10 +42,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// passport stuff
+app.use(session({
+  secret: 'devkey',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
 app.use('/patients', patientsRouter);
 app.use('/birds', birdsRouter);
+app.use('/accounts', accountsRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

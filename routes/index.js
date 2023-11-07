@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const Bird = require('../models/bird');
+const authMiddleware = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/', async function (req, res, next) {
-
+router.get('/', authMiddleware.ensureAuthenticated,  async function (req, res, next) {
   res.render('index');
 });
 

@@ -8,6 +8,9 @@
     <div class="container">
       <h1>Home Page</h1>
      
+      <% if (locals.user) { %>
+        <p>Hi <%= locals.user.firstName %>!</p>
+      <% } %>
       <a href="/birds">Go to Birds</a>
     </div>
     <% include ./partials/scripts %>
