@@ -27,6 +27,7 @@ var indexRouter = require('./routes/index');
 var patientsRouter = require('./routes/patients');
 var birdsRouter = require('./routes/birds');
 var accountsRouter = require('./routes/accounts');
+var usersRouter = require('./routes/users');
 
 require('dotenv').config({ path: __dirname + '/.env' })
 
@@ -63,6 +64,7 @@ app.use('/', indexRouter);
 app.use('/patients', patientsRouter);
 app.use('/birds', birdsRouter);
 app.use('/accounts', accountsRouter);
+app.use('/users', usersRouter);
 
 
 
