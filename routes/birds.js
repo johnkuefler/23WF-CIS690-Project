@@ -67,6 +67,7 @@ router.post('/create', authMiddleware.ensureAuthenticated, async function (req, 
     await newBird.save();
   } catch (err) {
     console.log(err);
+    res.render('error', {message: 'Invalid data submitted!'});
   }
 
   res.redirect('/birds');
